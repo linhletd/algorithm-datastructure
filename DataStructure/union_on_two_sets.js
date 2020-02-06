@@ -34,16 +34,10 @@ function Set() {
     this.union = function(set){
         let newSet = new Set();
         this.values().map(cur => {newSet.add(cur)});
-        set.map(cur => {newSet.add(cur);})
-        return newSet.values();
+        set.values().map(cur => {newSet.add(cur);})
+        return newSet;
         
     }
     // change code above this line
 }
 
-let obj = new Set();
-obj.add('a');
-obj.add('b');
-obj.add('c');
-
-console.log(obj.values(),obj.union(['c','d']));
