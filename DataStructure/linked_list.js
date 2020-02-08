@@ -55,5 +55,44 @@ function LinkedList() {
           }
         // Only change code above this line
       };
+      this.indexOf = function(element){
+        if(this.isEmpty()){
+          console.log('haha')
+          return -1;
+        }
+        else {
+          let currentNode = head;
+          console.log('am here')
+          for(let i = 0; i < this.size(); i++) {
+            console.log(i)
+                if(currentNode.element ===  element){
+                  return i;
+                }
+                else if (currentNode.element !== element && i === this.size -1){
+                  return -1;
+                }
+              currentNode = currentNode.next;
+            }
+        }
+      };
+      this.elementAt = function(index){
+           if(this.isEmpty()){
+          return undefined;
+        }
+        else {
+          let currentNode = head;
+          let i = 0;
+          while(currentNode !== null) {
+                if(index === i){
+                  return currentNode.element;
+                }
+                else if (currentNode.next === null){
+                  return undefined;
+                }
+              currentNode = currentNode.next;
+              i++;
+            }
+        }
+      }
   }
   
