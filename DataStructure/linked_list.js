@@ -34,5 +34,26 @@ function LinkedList() {
       }
       // Only change code above this line
     };
+    this.remove = function(element){
+        // Only change code below this line
+          if(!head){
+            return;
+          }
+          else if(head.element === element) {
+              head = head.next;
+              length--;
+            }
+          else {
+            let currentNode = head;
+            while(currentNode.next){
+              if(currentNode.next.element === element){
+                currentNode.next = currentNode.next.next;
+                length--;
+              }
+              currentNode = currentNode.next;
+            }
+          }
+        // Only change code above this line
+      };
   }
   
