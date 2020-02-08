@@ -93,6 +93,33 @@ function LinkedList() {
               i++;
             }
         }
+      };
+      this.removeAt = function(index){
+        if(this.isEmpty() || index < 0 || index >= this.size()){
+          return null;
+        }
+        else if(index === 0){
+          let temp = head.element;
+          head = head.next;
+          console.log(head);
+          length--;
+          return temp;
+        }
+        else {
+          let currentNode = head;
+          let i = 0;
+          while(currentNode){
+            i++
+            if(i === index){
+              let temp =currentNode.next.element;
+              currentNode.next = currentNode.next.next;
+              length--;
+              return temp;
+            }
+            currentNode = currentNode.next;
+          }
+          return null;
+        }
       }
   }
   
