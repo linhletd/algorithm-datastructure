@@ -120,6 +120,33 @@ function LinkedList() {
           }
           return null;
         }
+      };
+      this.addAt = function(index, element){
+        if(index < 0 || index > this.size()){
+          return false;
+        }
+        else if(index === 0){
+          let newNode = new Node(element);
+          newNode.next = head;
+          head = newNode;
+          length++;
+          return true;
+        }
+        else {
+          let currentNode = head;
+          let i =0;
+          while(currentNode){
+            i++;
+            if(i === index){
+              let a1 = new Node(element);
+              let a2 = currentNode.next;
+              currentNode.next = a1;
+              a1.next = a2;
+              length++;
+              return true;
+            }
+          }
+        }
       }
   }
   
