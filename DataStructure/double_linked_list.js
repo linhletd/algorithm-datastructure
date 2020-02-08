@@ -50,6 +50,24 @@ var Node = function(data, prev) {
             }
           
         }
+        this.reverse = function(){
+          if(this.head === null){
+            return null;
+          }
+          else {
+            let currentNode = this.head;
+            let temp;
+            while (currentNode){
+                temp = currentNode.prev;
+                currentNode.prev = currentNode.next;
+                currentNode.next = temp;
+                currentNode = currentNode.prev;
+              }
+              temp = this.tail;
+              this.tail = this.head;
+              this.head = temp;
+            }
+        }
     // change code above this line
   };
   let list = new DoublyLinkedList();
