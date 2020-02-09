@@ -48,6 +48,46 @@ function BinarySearchTree() {
       }
     }
 
+  };
+  this.findMin = function(){
+    if(this.root === null){
+      return null;
+    }
+    else {
+      let min;
+      let currentNode = this.root;
+      let found = false;
+      while (!found){
+        if (currentNode.left === null){
+          // found = true;
+          min = currentNode.value;
+          return min;
+        }
+        else {
+          currentNode = currentNode.left;
+        }
+      }
+    }
+  };
+  this.findMax = function(){
+    if(this.root === null){
+      return null;
+    }
+    else {
+      let max;
+      let currentNode = this.root;
+      let found = false;
+      while (!found){
+        if (currentNode.right === null){
+          // found = true;
+          max = currentNode.value;
+          return max;
+        }
+        else {
+          currentNode = currentNode.right;
+        }
+      }
+    }
   }
   // change code above this line
 }
@@ -56,4 +96,4 @@ tree.add(5);
 tree.add(3);
 tree.add(4);
 tree.add(7);
-console.log(tree.root)
+console.log(tree.findMin())
