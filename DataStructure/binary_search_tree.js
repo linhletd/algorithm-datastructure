@@ -241,6 +241,52 @@ this.postorder = function(){
     }
     getValues(traversal);
     return values;
+};
+this.levelOrder = function(){
+  if(this.root === null){
+    return null;
+  }
+  let values = [];
+  let level = [this.root];
+  function getValues(level){
+    if(level.length === 0){
+      return;
+    }
+    let currentNode = level.shift();
+    values.push(currentNode.value);
+    if(currentNode.left){
+      level.push(currentNode.left);
+    }
+    if(currentNode.right){
+      level.push(currentNode.right);
+    }
+    getValues(level);
+  }
+  getValues(level);
+  return values;
+};
+this.reverseLevelOrder = function(){
+  if(this.root === null){
+    return null;
+  }
+  let values = [];
+  let level = [this.root];
+  function getValues(level){
+    if(level.length === 0){
+      return;
+    }
+    let currentNode = level.shift();
+    values.push(currentNode.value);
+    if(currentNode.right){
+      level.push(currentNode.right);
+    }
+    if(currentNode.left){
+      level.push(currentNode.left);
+    }
+    getValues(level);
+  }
+  getValues(level);
+  return values; 
 }
   // change code above this line
 }
