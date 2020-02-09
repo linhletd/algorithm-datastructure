@@ -108,6 +108,69 @@ function BinarySearchTree() {
         currentNode = currentNode.right;
       }
     }
+};
+this.findMinHeight = function(){
+  if(this.root === null){
+    return -1;
+  }
+  else {
+    let min = Number.POSITIVE_INFINITY;
+    let i = -1
+    function check(node,i){
+      i++;
+      if(node.left === null && node.right === null){
+        if (i < min){
+          min = i;
+        };
+        return;
+      }
+      else {
+        if (node.left){
+          let i1 = i;
+          check(node.left, i1);
+        }
+        if(node.right){
+          let i2 = i;
+          check(node.right, i2)
+        }
+      }
+    }
+    check(this.root,i);
+    return min;
+  }
+};
+this.findMaxHeight = function(){
+      if(this.root === null){
+    return -1;
+  }
+  else {
+    let max = -1;
+    let i = -1
+    function check(node,i){
+      i++;
+      if(node.left === null && node.right === null){
+        if (i > max){
+          max = i;
+        };
+        return;
+      }
+      else {
+        if (node.left){
+          let i1 = i;
+          check(node.left, i1);
+        }
+        if(node.right){
+          let i2 = i;
+          check(node.right, i2)
+        }
+      }
+    }
+    check(this.root,i);
+    return max;
+  }
+};
+this.isBalanced = function(){
+  return this.findMaxHeight() - this.findMinHeight() <= 1;
 }
   // change code above this line
 }
