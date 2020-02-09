@@ -171,6 +171,76 @@ this.findMaxHeight = function(){
 };
 this.isBalanced = function(){
   return this.findMaxHeight() - this.findMinHeight() <= 1;
+};
+this.inorder = function(){
+  if(this.root === null){
+    return null;
+  }
+    let values = [];
+    let traversal = this.root;
+    function getValues(traversal){
+      if(!traversal.left && !traversal.right){
+        values.push(traversal.value);
+      }
+      else {
+        if(traversal.left){
+          getValues(traversal.left);
+        }
+        values.push(traversal.value);
+        if(traversal.right){
+          getValues(traversal.right);
+        }
+      }
+    }
+    getValues(traversal);
+    return values;
+};
+this.preorder = function(){
+  if(this.root === null){
+    return null;
+  }
+    let values = [];
+    let traversal = this.root;
+    function getValues(traversal){
+      if(!traversal.left && !traversal.right){
+        values.push(traversal.value);
+      }
+      else {
+        values.push(traversal.value);
+        if(traversal.left){
+          getValues(traversal.left);
+        }
+        if(traversal.right){
+          getValues(traversal.right);
+        }
+      }
+    }
+    getValues(traversal);
+    return values;
+};
+this.postorder = function(){
+  if(this.root === null){
+    return null;
+  }
+    let values = [];
+    let traversal = this.root;
+    function getValues(traversal){
+      if(!traversal.left && !traversal.right){
+        values.push(traversal.value);
+      }
+      else {
+
+        if(traversal.left){
+          getValues(traversal.left);
+        }
+        if(traversal.right){
+          getValues(traversal.right);
+        }
+        values.push(traversal.value);
+      }
+    }
+    getValues(traversal);
+    return values;
 }
   // change code above this line
 }
