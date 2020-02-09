@@ -287,6 +287,42 @@ this.reverseLevelOrder = function(){
   }
   getValues(level);
   return values; 
+};
+this.remove = function(element){
+  if(this.root === null){
+    return null;
+  }
+  else if(!this.root.left && !this.root.right){
+    this.root = null;
+    return;
+  }
+  let found = false;
+  function findAndDelete(currentNode){
+    if (found === true){
+      return;
+    }
+    if(currentNode.left){
+      if(!currentNode.left.left && !currentNode.left.right && currentNode.left.value === element){
+        currentNode.left = null;
+        found = true;
+        return;
+      }
+      else {
+        findAndDelete(currentNode.left);
+      }
+    }
+      if(currentNode.right){
+        if(!currentNode.right.left && !currentNode.right.right && currentNode.right.value === element){
+          currentNode.right = null;
+          found = true;
+          return;
+        }
+        else {
+          findAndDelete(currentNode.right);
+        }
+      }
+  }
+  findAndDelete(this.root)
 }
   // change code above this line
 }
