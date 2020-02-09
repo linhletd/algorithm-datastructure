@@ -88,7 +88,27 @@ function BinarySearchTree() {
         }
       }
     }
-  }
+  };
+  this.isPresent = function(num){
+    let currentNode = this.root;
+    let found = false;
+    while (!found){
+      if (currentNode === null){
+        found = true;
+        return false;
+      }
+      else if(currentNode.value === num){
+        found = true;
+        return true;
+      }
+      else if (currentNode.value > num) {
+        currentNode = currentNode.left;
+      }
+      else if (currentNode.value < num){
+        currentNode = currentNode.right;
+      }
+    }
+}
   // change code above this line
 }
 let tree = new BinarySearchTree();
