@@ -292,7 +292,7 @@ this.remove = function(element){
   if(this.root === null){
     return null;
   }
-  else if(!this.root.left && !this.root.right){
+  else if(!this.root.left && !this.root.right && this.root.value === element){
     this.root = null;
     return;
   }
