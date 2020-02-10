@@ -289,21 +289,110 @@ this.reverseLevelOrder = function(){
   return values; 
 };
 this.remove = function(element){
+  // if(this.root === null){
+  //   return null;
+  // }
+  // else if(!this.root.left && !this.root.right && this.root.value === element){
+  //   this.root = null;
+  //   return;
+  // }
+  // let found = false;
+  // function findAndDelete(currentNode){
+  //   if (found === true){
+  //     return;
+  //   }
+  //   if(currentNode.left){
+  //     if(!currentNode.left.left && !currentNode.left.right && currentNode.left.value === element){
+  //       currentNode.left = null;
+  //       found = true;
+  //       return;
+  //     }
+  //     else {
+  //       findAndDelete(currentNode.left);
+  //     }
+  //   }
+  //     if(currentNode.right){
+  //       if(!currentNode.right.left && !currentNode.right.right && currentNode.right.value === element){
+  //         currentNode.right = null;
+  //         found = true;
+  //         return;
+  //       }
+  //       else {
+  //         findAndDelete(currentNode.right);
+  //       }
+  //     }
+  // }
+  // findAndDelete(this.root)
+  //******************* replace with:
   if(this.root === null){
     return null;
   }
-  else if(!this.root.left && !this.root.right && this.root.value === element){
-    this.root = null;
-    return;
+
+  function findNodeToBind(currentNode){
+    let node = currentNode;
+    while(node.left){
+      node = node.left;
+    }
+    return node;
   }
+
+  function deleteNode(parent, left, right, branch){
+
+    let truthy = !left + !right;
+    if(truthy === 2){
+        parent[branch] = null;
+        return;
+      }
+    else if(truthy === 1){
+      if(left){
+        parent[branch] = left;
+      }
+      else if(right){
+        parent[branch] = right;
+      }
+    }
+    else if(truthy === 0){
+      parent[branch] = right;
+      findNodeToBind(right).left = left;
+    }
+  }
+
+  if(this.root.value === element){
+    let left = this.root.left;
+    let right = this.root.right;
+    let truthy = !left + !right;
+    if(truthy === 2){
+        this.root = null;
+        return;
+      }
+    else if(truthy === 1){
+      if(left){
+        this.root = left;
+      }
+      else if(right){
+        this.root = right;
+      }
+    }
+    else if(truthy === 0){
+      this.root = right;
+      findNodeToBind(right).left = left;
+    }
+  }
+
   let found = false;
+  let left = null;
+  let right = null;
+  let parent;
   function findAndDelete(currentNode){
     if (found === true){
       return;
     }
     if(currentNode.left){
-      if(!currentNode.left.left && !currentNode.left.right && currentNode.left.value === element){
-        currentNode.left = null;
+      if(currentNode.left.value === element){
+        left = currentNode.left.left;
+        right = currentNode.left.right;
+        parent = currentNode;
+        deleteNode(parent, left, right,'left');
         found = true;
         return;
       }
@@ -311,18 +400,21 @@ this.remove = function(element){
         findAndDelete(currentNode.left);
       }
     }
-      if(currentNode.right){
-        if(!currentNode.right.left && !currentNode.right.right && currentNode.right.value === element){
-          currentNode.right = null;
-          found = true;
-          return;
-        }
-        else {
-          findAndDelete(currentNode.right);
-        }
+    if(currentNode.right){
+      if(currentNode.right.value === element){
+        left = currentNode.right.left;
+        right = currentNode.right.right;
+        parent = currentNode;
+        deleteNode(parent, left, right, 'right');
+        found = true;
+        return;
       }
+      else {
+        findAndDelete(currentNode.right);
+      }
+    }
   }
-  findAndDelete(this.root)
+  findAndDelete(this.root);
 }
   // change code above this line
 }
