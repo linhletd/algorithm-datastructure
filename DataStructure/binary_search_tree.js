@@ -415,7 +415,31 @@ this.remove = function(element){
     }
   }
   findAndDelete(this.root);
-}
+};
+this.invert = function(){
+  if(this.root === null){
+    return null;
+  }
+  let temp;
+  function invert(currentNode){
+    if(!currentNode.left && !currentNode.right){
+      return;
+    }
+    else{
+      if(currentNode.left){
+        invert(currentNode.left);
+      }
+      if(currentNode.right){
+        invert(currentNode.right);
+      }
+      temp = currentNode.left;
+      currentNode.left = currentNode.right;
+      currentNode.right = temp;
+
+    }
+  }
+  invert(this.root);
+};
   // change code above this line
 }
 let tree = new BinarySearchTree();
