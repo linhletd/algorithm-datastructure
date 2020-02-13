@@ -26,7 +26,39 @@ var MaxHeap = function() {
     };
     this.print = function(){
       return collection;
-    }
+    };
+    this.remove = function(){
+        console.log(collection,'hehe');
+if(collection.length === 1){
+return null;
+}
+else if(collection.length === 2){
+let max = collection[1];
+collection[1] = collection.pop();
+return max;
+}
+let max = collection[1];
+let nextIndex;
+let temp;
+collection[1] = collection.pop();
+function exchange(currentIndex = 1){
+
+if(collection[2*currentIndex]){
+  nextIndex = 2*currentIndex;
+  if(collection[2*currentIndex +1] > collection[2*currentIndex]){
+    nextIndex = 2*currentIndex+1;
+  }
+  if(collection[currentIndex] < collection[nextIndex]){
+    temp = collection[currentIndex];
+    collection[currentIndex] = collection[nextIndex];
+    collection[nextIndex] = temp;
+    exchange(nextIndex);
+  }
+}
+}
+exchange();
+return max;
+}
     // change code above this line
   };
   let a = new MaxHeap();
