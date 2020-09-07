@@ -1,29 +1,33 @@
-function quickSort(array) {
-    let newArr = [];
-    function sort(arr, index = 0){
-        if(arr.length === 0){
+function quickSort(arr) {
+    let a = arr.splice(0, arr.length);
+    let split;
+    (split = (a)=>{
+        if(a.length == 1){
+            arr.push(a[0]);
             return;
         }
-        let middle = arr[0];
-        let less = [];
-        let greater = [];
-        for(let i = 1; i < arr.length; i++){
-            if(arr[i] <= middle){
-                less.push(arr[i]);
+        else{
+            let pivot = a[a.length-1];
+            let a1 = [], a2 = [], am = [];
+            for(let i = 0; i < a.length; i++){
+                if(a[i] < pivot){
+                    a1.push(a[i])
+                }
+                else if(a[i] === pivot){
+                    am.push(a[i]);
+                }
+                else{
+                    a2.push(a[i])
+                }
             }
-            else if(arr[i] > middle){
-                greater.push(arr[i]);
+            a1.length && split(a1);
+            for(let i = 0; i < am.length; i++){
+                arr.push(am[i]);
             }
+            a2.length && split(a2);
         }
-        let leftIdx = index;
-        let rightIdx = index + less.length + 1;
-       
-        newArr[rightIdx - 1] = middle;
-        sort(less, leftIdx);
-        sort(greater, rightIdx);
-    }
-    sort(array);
-    return newArr;
+    })(a)
+    return arr;
   }
   
   // test array:
